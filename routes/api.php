@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('post', [PostApiController::class,'index']);
+Route::get('post/search/{keyword}', [PostApiController::class,'search']);
 Route::post('post/store', [PostApiController::class,'store']);
 Route::get('post/edit/{id}', [PostApiController::class,'edit']);
 Route::post('post/update/{id}', [PostApiController::class,'update']);

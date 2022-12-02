@@ -8,13 +8,21 @@ class PostApiController extends Controller
 {
     public function index()
     {
-        $post = Post::latest()->get();
+        $post = Post::paginate(5);
         $data= array(
             'success'=>true, 
             'message'=>'Data was Found', 
             'data'=>$post
         );
         
+        return response()->json($post, 201);
+    }
+    public function search($keyword){
+        $data = Post::
+        where('id', 'LIKE', "%{$keyword}%") 
+        ->orWhere('title', 'LIKE', "%{$keyword}%")
+        ->orWhere('body', 'LIKE', "%{$keyword}%") 
+        ->get();
         return response()->json($data, 201);
     }
 
